@@ -39,7 +39,7 @@ function secondsToMinutesSeconds(seconds) {
 async function getsong(folder) {
   curfolder = folder;
   let song = await fetch(
-    `http://127.0.0.1:5501/songs/${folder}`
+    `http://127.0.0.1:5500/songs/${folder}`
     // `https://github.com/Mayankarayat/spotify-clone/tree/main/songs/${folder}`
     // `/${folder}`
   );
