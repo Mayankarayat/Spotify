@@ -39,12 +39,11 @@ function secondsToMinutesSeconds(seconds) {
 async function getsong(folder) {
   curfolder = folder;
   let song = await fetch(
-    `https://mayankarayat.github.io/Spotify/tree/main/songs/${folder}`  // https://mayankarayat.github.io
+    // `http://127.0.0.1:5501/songs/${folder}`
     // `https://github.com/Mayankarayat/spotify-clone/tree/main/songs/${folder}`
-    // `/${folder}`
+    `/${folder}/`
   );
   let response = await song.text();
-  console.log(response);
   let div = document.createElement("div");  
   div.innerHTML = response;
   let a = div.getElementsByTagName("a");
@@ -70,7 +69,6 @@ async function getsong(folder) {
   Array.from(list.getElementsByClassName("song-card")).forEach((e) => {
     e.addEventListener("click", (element) => {
       let name = e.querySelector(".name").innerHTML.trim();
-      console.log(name);
       playmusic(name);
     });
   });
@@ -111,7 +109,6 @@ async function main1() {
   let leftbar = document.body.querySelector(".left");
 
   Array.from(play1).forEach(e=>{
-    console.log(e);
     
     e.addEventListener("click",()=>{
       if (leftbar.style.left == "-100%") {
@@ -141,7 +138,6 @@ async function main1() {
   });
 
   currentsong.addEventListener("timeupdate", () => {
-    console.log(currentsong.currentTime, currentsong.duration);
     document.body.querySelector(
       ".song-time"
     ).innerHTML = `${secondsToMinutesSeconds(
@@ -181,7 +177,6 @@ async function main1() {
     let index = song1.indexOf(
       currentsong.src.split(`songs/${curfolder}/`).slice(-1)[0]
     );
-    console.log(index);
     if (index - 1 >= 0) {
       playmusic(song1[index - 1]);
     }
@@ -195,7 +190,6 @@ async function main1() {
     let index = song1.indexOf(
       currentsong.src.split(`songs/${curfolder}/`).slice(-1)[0]
     );
-    console.log(song1);
 
     if (index + 1 < song1.length) {
       playmusic(song1[index + 1]);
@@ -203,10 +197,8 @@ async function main1() {
   });
 
   Array.from(document.body.getElementsByClassName("card")).forEach((e) => {
-    console.log(e);
     e.addEventListener("click", async (item) => {
-      console.log(item.currentTarget.dataset.folder);
-      song1 = await getsong(`${item.currentTarget.dataset.folder}`);
+      song1 = await getsong(`songs/${item.currentTarget.dataset.folder}`);
 
       playmusic(song1[0], true);
     });
