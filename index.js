@@ -39,9 +39,9 @@ function secondsToMinutesSeconds(seconds) {
 async function getsong(folder) {
   curfolder = folder;
   let song = await fetch(
-    `https://mayankarayat.github.io/Spotify/tree/main/songs/${folder}`  // https://mayankarayat.github.io
+    // `http://127.0.0.1:5501/songs/${folder}`
     // `https://github.com/Mayankarayat/spotify-clone/tree/main/songs/${folder}`
-    // `/${folder}`
+    `/${folder}/`
   );
   let response = await song.text();
   console.log(response);
@@ -206,7 +206,7 @@ async function main1() {
     console.log(e);
     e.addEventListener("click", async (item) => {
       console.log(item.currentTarget.dataset.folder);
-      song1 = await getsong(`${item.currentTarget.dataset.folder}`);
+      song1 = await getsong(`songs/${item.currentTarget.dataset.folder}`);
 
       playmusic(song1[0], true);
     });
