@@ -198,7 +198,8 @@ async function main1() {
 
   Array.from(document.body.getElementsByClassName("card")).forEach((e) => {
     e.addEventListener("click", async (item) => {
-      song1 = await getsong(`songs/${item.currentTarget.dataset.folder}`);
+      console.log(item.currentTarget.dataset.folder);
+      song1 = await getsong(`${item.currentTarget.dataset.folder}`);
 
       playmusic(song1[0], true);
     });
